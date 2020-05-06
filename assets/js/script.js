@@ -16,8 +16,30 @@ var choice = 0;
 var questionIndex = 0;
 
 answerArray = [answer1, answer2, answer3, answer4];
-choiceText = ['example answer', 'example answer2', 'example answer3', 'example answer4', 'example answer5', 'example answer6', 'example answer7', 'example answer8', 'example answer9', 'example answer10', 'example answer11', 'example answer12', 'example answer13', 'example answer14', 'example answer15', 'example answer16',];
-questionArray = ['What is a method?', 'What is a function?', 'What is the difference between let and var?', 'What is an array?'];
+choiceText = [
+	'<javascript>',
+	'<js>',
+	'<scripting>',
+	'<script>',
+	'The <body> section',
+	'After the <body> section',
+	'The <head> section',
+	'Both the <head> and <body> section are correct',
+	'var colors = (1:"red", 2:"green", 3:"blue")',
+	'var colors = 1 = ("red"), 2 = ("green"), 3 = ("blue")',
+	'var colors = ["red", "green", "blue"]',
+	'var colors = "red", "green", "blue"',
+	'onclick',
+	'onmouseclick',
+	'onchange',
+	'onmouseover',
+];
+questionArray = [
+	'Inside which HTML element do we put the JavaScript?',
+	'Where is the correct place to insert a <script> element?',
+	'What is the correct way to write a JavaScript array?',
+	'Which event occurs when the user clicks on an HTML element?',
+];
 
 answerList.setAttribute('class', 'list-group flex-center');
 
@@ -30,21 +52,21 @@ startBtn.onclick = function startQuiz() {
 
 	for (choice = 0; choice < answerArray.length; choice++) {
 		answerArray[choice].setAttribute('class', 'list-group-item list=group-item-action');
-        answerArray[choice].setAttribute('type', 'button');
-        answerArray[choice].setAttribute('onclick', 'nextQuestion()');
-        answerList.appendChild(answerArray[choice]);
+		answerArray[choice].setAttribute('type', 'button');
+		answerArray[choice].setAttribute('onclick', 'nextQuestion()');
+		answerList.appendChild(answerArray[choice]);
 		answerArray[choice].textContent = choiceText[choice];
-    }
+	}
 };
 
 function nextQuestion() {
-    header.textContent = questionArray[++questionIndex];
-    for (n = 0; n < answerArray.length; n++) {
-        answerArray[n].textContent = choiceText[choice];
-        choice++;
-        if (choice > 16){
-            endQuiz();
-        }
+	header.textContent = questionArray[++questionIndex];
+	for (n = 0; n < answerArray.length; n++) {
+		answerArray[n].textContent = choiceText[choice];
+		choice++;
+		if (choice > 16) {
+			endQuiz();
+		}
 	}
 }
 
@@ -54,19 +76,19 @@ function startTimer() {
 		timer.textContent = 'Timer: ' + secondsLeft;
 
 		if (secondsLeft === 0 || choice > 16) {
-            clearInterval(timerInterval);
-            endQuiz();
+			clearInterval(timerInterval);
+			endQuiz();
 		}
 	}, 1000);
-};
+}
 
 function endQuiz() {
-    score = secondsLeft;
-    header.textContent = 'Score = ' + score;
-    answerList.remove();
-    scoreForm();
+	score = secondsLeft;
+	header.textContent = 'Score = ' + score;
+	answerList.remove();
+	scoreForm();
 }
 
 function scoreForm() {
-    form.style.display = "flex";
+	form.style.display = 'flex';
 }
