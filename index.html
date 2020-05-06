@@ -21,10 +21,21 @@
 		</nav>
 
 		<main class="card text-center">
-			<section class="card-body" id="quiz">
+			<section class="card-body flex-center" id="quiz">
 				<h1 class="card-title" id="header">Coding Quiz</h1>
 				<p class="card-text" id="intro">Let's get started on your coding knowledge!</p>
-				<button id="startBtn">Start Quiz</button>
+                <button id="startBtn">Start Quiz</button>
+                <form class="form-inline" id="score-form">
+                    <div class="form-group mb-2">
+                      <label for="initials" class="sr-only">Description</label>
+                      <input type="text" readonly class="form-control-plaintext" value="Enter your initals">
+                    </div>
+                    <div class="form-group mx-sm-3 mb-2">
+                      <label for="initials" class="sr-only">Initials</label>
+                      <input type="password" class="form-control" id="initials" placeholder="Initials">
+                    </div>
+                    <button type="submit" class="btn btn-primary mb-2">Submit</button>
+                  </form>
 			</section>
 		</main>
 		<script src="assets/js/script.js"></script>
