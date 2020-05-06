@@ -74,12 +74,11 @@ function startTimer() {
 	var timerInterval = setInterval(function () {
 		secondsLeft = secondsLeft - 1;
 		timer.textContent = 'Timer: ' + secondsLeft;
-
-		if (secondsLeft === 0 || choice > 16) {
-			clearInterval(timerInterval);
-			endQuiz();
-		}
-	}, 1000);
+    }, 1000);
+    if (secondsLeft === 0 || choice > 16) {
+        clearInterval(timerInterval);
+        endQuiz();
+    }
 }
 
 function endQuiz() {
