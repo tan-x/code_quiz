@@ -8,12 +8,15 @@ var header,
   answer3,
   answer4,
   timer,
-  score;
+  score,
+  leaderboard;
 
 timer = document.getElementById("timer");
 header = document.getElementById("header");
 intro = document.getElementById("intro");
 startBtn = document.getElementById("startBtn");
+submitBtn = document.getElementById("submit");
+initials = document.getElementById('initials');
 quiz = document.getElementById("quiz");
 form = document.getElementById("score-form");
 result = document.getElementById("result");
@@ -52,6 +55,7 @@ questionArray = [
   "What is the correct way to write a JavaScript array?",
   "Which event occurs when the user clicks on an HTML element?",
 ];
+leaderboard = [];
 
 answerList.setAttribute("class", "list-group flex-center");
 
@@ -119,4 +123,9 @@ function endQuiz() {
 
 function scoreForm() {
   form.style.display = "flex";
+}
+
+function addLeader(event) {
+  event.preventDefault();
+  leaderboard.push({initials: initials.value, score: score});
 }
