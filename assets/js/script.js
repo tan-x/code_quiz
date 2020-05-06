@@ -53,7 +53,7 @@ function startTimer() {
 		secondsLeft = secondsLeft - 1;
 		timer.textContent = 'Timer: ' + secondsLeft;
 
-		if (secondsLeft === 0) {
+		if (secondsLeft === 0 || choice > 16) {
             clearInterval(timerInterval);
             endQuiz();
 		}
@@ -61,6 +61,7 @@ function startTimer() {
 };
 
 function endQuiz() {
+    score = secondsLeft;
     header.textContent = 'Score = ' + score;
     answerList.remove();
     scoreForm();
