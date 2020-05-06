@@ -16,12 +16,13 @@ intro = document.getElementById("intro");
 startBtn = document.getElementById("startBtn");
 quiz = document.getElementById("quiz");
 form = document.getElementById("score-form");
+result = document.getElementById("result");
 answerList = document.createElement("div");
 answer1 = document.createElement("button");
 answer2 = document.createElement("button");
 answer3 = document.createElement("button");
 answer4 = document.createElement("button");
-var secondsLeft = 40;
+var secondsLeft = 60;
 var choice = 0;
 var questionIndex = 0;
 
@@ -44,6 +45,7 @@ choiceText = [
   "onchange",
   "onmouseover",
 ];
+correctArray = [choiceText[3], choiceText[4], choiceText[10], choiceText[12]];
 questionArray = [
   "Inside which HTML element do we put the JavaScript?",
   "Where is the correct place to insert a <script> element?",
@@ -66,13 +68,24 @@ startBtn.onclick = function startQuiz() {
       "list-group-item list=group-item-action"
     );
     answerArray[choice].setAttribute("type", "button");
-    answerArray[choice].setAttribute("onclick", "nextQuestion()");
+    answerArray[choice].setAttribute("onclick", "nextQuestion(event)");
     answerList.appendChild(answerArray[choice]);
     answerArray[choice].textContent = choiceText[choice];
   }
 };
 
-function nextQuestion() {
+function nextQuestion(event) {
+  if (
+    event.target.innerText === correctArray[0] ||
+    event.target.innerText === correctArray[1] ||
+    event.target.innerText === correctArray[2] ||
+    event.target.innerText === correctArray[3]
+  ) {
+	result.innerText = "Correct!";
+  } else {
+	secondsLeft = secondsLeft - 10;
+	result.innerText = "Wrong!";
+  }
   header.textContent = questionArray[++questionIndex];
   for (n = 0; n < answerArray.length; n++) {
     answerArray[n].textContent = choiceText[choice];
@@ -98,6 +111,7 @@ function startTimer() {
 
 function endQuiz() {
   score = secondsLeft;
+  timer.textContent = "Timer: 0";
   header.textContent = "Score = " + score;
   answerList.remove();
   scoreForm();
