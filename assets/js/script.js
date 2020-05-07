@@ -1,5 +1,5 @@
 var header, intro, startBtn, quiz, answerList, answer1, answer2, answer3, answer4, timer, score, leaderArray;
-leaderboard;
+leaderboard, choice;
 
 timer = document.getElementById('timer');
 header = document.getElementById('header');
@@ -18,7 +18,7 @@ answer2 = document.createElement('button');
 answer3 = document.createElement('button');
 answer4 = document.createElement('button');
 
-var secondsLeft = 60;
+var secondsLeft = 40;
 var choice = 0;
 var questionIndex = 0;
 
@@ -58,6 +58,7 @@ startBtn.onclick = function startQuiz() {
 	intro.style.display = 'none';
 	startBtn.style.display = 'none';
 	quiz.appendChild(answerList);
+	answerList.style = '';
 
 	for (choice = 0; choice < answerArray.length; choice++) {
 		answerArray[choice].setAttribute('class', 'list-group-item list=group-item-action');
@@ -121,5 +122,18 @@ function addLeader(event) {
     leaderboard.style.display = 'grid';
     form.style.display = 'none';
     leaderboard.children[0].appendChild(document.createElement('li'));
-    leaderboard.children[0].lastChild.innerText = initials.value;
+    leaderboard.children[0].lastChild.innerText = initials.value + " - " + score;
+}
+
+function goBack() {
+	// reset timer and question index
+	secondsLeft = 40;
+	timer.textContent = "Timer: " + secondsLeft;
+	questionIndex = 0;
+	// reset elements to start page layout
+	header.textContent = "Coding Quiz";
+	intro.style = '';
+	startBtn.style = '';
+	// hide leaderboard
+	leaderboard.style.display = 'none';
 }
