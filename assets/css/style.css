@@ -1,20 +1,35 @@
 button {
-    max-width: fit-content;
-    margin: 7px;
-    border-top-width: 1px!important;
+	max-width: fit-content;
+	margin: 7px;
+	border-top-width: 1px !important;
 }
 
 .flex-center {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 #score-form {
-    display: none;
-    margin: 30px;
+	display: none;
+	margin: 30px;
 }
 
 #leaderboard {
-    display: none;
+	display: none;
+}
+
+button:active,
+button:focus {
+	outline: none !important;
+}
+
+button {
+	transition: 200ms ease-out;
+}
+
+button:hover {
+	background-color: #dc3545;
+	color: white;
+	transition: 200ms ease-in;
 }
