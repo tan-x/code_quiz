@@ -18,3 +18,21 @@ button {
 #leaderboard {
     display: none;
 }
+
+.button:active, 
+ button:active,
+.button:focus, 
+ button:focus {
+    outline:none !important;
+}
+
+button {
+    transition: 200ms ease-out;
+}
+
+.button:hover, 
+ button:hover {
+    background-color:#dc3545;
+    color: white;
+    transition: 200ms ease-in;
+ }
