@@ -77,9 +77,11 @@ function nextQuestion(event) {
 		event.target.innerText === correctArray[3]
 	) {
 		result.innerText = 'Correct!';
+		setTimeout(() => {result.innerText = '';}, 1500);
 	} else {
-		secondsLeft = secondsLeft - 10;
+		secondsLeft = secondsLeft - 8;
 		result.innerText = 'Wrong!';
+		setTimeout(() => {result.innerText = '';}, 1500);
 	}
 	header.textContent = questionArray[++questionIndex];
 	for (n = 0; n < answerArray.length; n++) {
