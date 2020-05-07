@@ -33,3 +33,7 @@ button:hover {
 	color: white;
 	transition: 200ms ease-in;
 }
+
+.result {
+    height: 65px;
+}
