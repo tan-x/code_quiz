@@ -137,3 +137,11 @@ function goBack() {
 	// hide leaderboard
 	leaderboard.style.display = 'none';
 }
+
+
+function clearBoard() {
+	var leaderLength = leaderboard.querySelectorAll('li').length;
+	for (i = 0; i < leaderLength; i++) {
+		leaderboard.children[0].lastChild.remove();
+	}
+}
