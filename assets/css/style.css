@@ -14,3 +14,7 @@ button {
     display: none;
     margin: 30px;
 }
+
+#leaderboard {
+    display: none;
+}
