@@ -70,6 +70,7 @@ startBtn.onclick = function startQuiz() {
 };
 
 function nextQuestion(event) {
+	var timeout;
 	if (
 		event.target.innerText === correctArray[0] ||
 		event.target.innerText === correctArray[1] ||
@@ -77,11 +78,11 @@ function nextQuestion(event) {
 		event.target.innerText === correctArray[3]
 	) {
 		result.innerText = 'Correct!';
-		setTimeout(() => {result.innerText = '';}, 1500);
+		timeout = setTimeout(() => {result.innerText = '';}, 1000);
 	} else {
 		secondsLeft = secondsLeft - 8;
 		result.innerText = 'Wrong!';
-		setTimeout(() => {result.innerText = '';}, 1500);
+		timeout = setTimeout(() => {result.innerText = '';}, 1000);
 	}
 	header.textContent = questionArray[++questionIndex];
 	for (n = 0; n < answerArray.length; n++) {
