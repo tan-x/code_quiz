@@ -55,8 +55,8 @@ answerList.setAttribute('class', 'list-group flex-center');
 startBtn.onclick = function startQuiz() {
 	startTimer();
 	header.textContent = questionArray[questionIndex];
-	intro.remove();
-	startBtn.remove();
+	intro.style.display = 'none';
+	startBtn.style.display = 'none';
 	quiz.appendChild(answerList);
 
 	for (choice = 0; choice < answerArray.length; choice++) {
@@ -107,7 +107,7 @@ function endQuiz() {
 	score = secondsLeft;
 	timer.textContent = 'Timer: 0';
 	header.textContent = 'Score = ' + score;
-	answerList.remove();
+	answerList.style.display = 'none';
     scoreForm();
 }
 
