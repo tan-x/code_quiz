@@ -120,6 +120,6 @@ function addLeader(event) {
     leaderArray.push({ initials: initials.value, score: score });
     leaderboard.style.display = 'grid';
     form.style.display = 'none';
-    leaderboard.children[0].appendChild(leaderList);
-    leaderList.innerText = initials.value;
+    leaderboard.children[0].appendChild(document.createElement('li'));
+    leaderboard.children[0].lastChild.innerText = initials.value;
 }
