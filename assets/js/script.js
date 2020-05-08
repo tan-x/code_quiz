@@ -66,6 +66,7 @@ answerList.setAttribute('class', 'list-group flex-center');
 
 startBtn.onclick = function startQuiz() {
 	startTimer();
+	score = 0;
 	header.textContent = quizData[questionIndex].question;
 	intro.style.display = 'none';
 	startBtn.style.display = 'none';
@@ -84,6 +85,7 @@ startBtn.onclick = function startQuiz() {
 function answerClick(event) {
 	if (event.target.innerText === quizData[questionIndex].answer) {
 		result.innerText = 'Correct!';
+		score += (10 + secondsLeft);
 		timeout = setTimeout(() => {
 			result.innerText = '';
 		}, 1000);
@@ -135,7 +137,6 @@ function startTimer() {
 }
 
 function endQuiz() {
-	score = secondsLeft;
 	timer.textContent = 'Timer: 0';
 	header.textContent = 'Score = ' + score;
 	answerList.style.display = 'none';
