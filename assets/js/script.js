@@ -148,3 +148,12 @@ function clearBoard() {
 		leaderboard.children[0].lastChild.remove();
 	}
 }
+
+function viewLeaderboard() {
+	timer.textContent = 'Timer: 0';
+	header.textContent = 'Leader Board'
+	intro.style.display = 'none';
+	startBtn.style.display = 'none';
+	answerList.style.display = 'none';
+	leaderboard.style.display = 'grid';
+}
