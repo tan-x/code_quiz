@@ -17,9 +17,11 @@ answer2 = document.createElement('button');
 answer3 = document.createElement('button');
 answer4 = document.createElement('button');
 
-var secondsLeft = 40;
+var secondsLeft = 10;
 var choice = 0;
 var questionIndex = 0;
+var timerInterval;
+var timeout;
 
 var quizData = [
 	{
@@ -51,7 +53,7 @@ var quizData = [
 		question: 'Which event occurs when the user clicks on an HTML element?',
 		answer: 'onclick',
 		choices: ['onclick', 'onmouseclick', 'onchange', 'onmouseover'],
-	}
+	},
 ];
 var answerArray = [answer1, answer2, answer3, answer4];
 var leaderArray = [];
@@ -73,27 +75,31 @@ startBtn.onclick = function startQuiz() {
 	for (choice = 0; choice < answerArray.length; choice++) {
 		answerArray[choice].setAttribute('class', 'list-group-item list=group-item-action');
 		answerArray[choice].setAttribute('type', 'button');
-		answerArray[choice].setAttribute('onclick', 'nextQuestion(event)');
+		answerArray[choice].setAttribute('onclick', 'answerClick(event)');
 		answerList.appendChild(answerArray[choice]);
 		answerArray[choice].textContent = quizData[0].choices[choice];
 	}
 };
 
-function nextQuestion(event) {
-	var timeout;
+function answerClick(event) {
 	if (event.target.innerText === quizData[questionIndex].answer) {
 		result.innerText = 'Correct!';
 		timeout = setTimeout(() => {
 			result.innerText = '';
 		}, 1000);
 	} else {
-		secondsLeft = secondsLeft - 8;
 		result.innerText = 'Wrong!';
 		timeout = setTimeout(() => {
 			result.innerText = '';
 		}, 1000);
 	}
-	if (questionIndex < (quizData.length - 1)) {
+	nextQuestion();
+}
+
+function nextQuestion() {
+	secondsLeft = 10;
+	startTimer();
+	if (questionIndex < quizData.length - 1) {
 		header.textContent = quizData[++questionIndex].question;
 	}
 	for (n = 0; n < answerArray.length; n++) {
@@ -107,8 +113,17 @@ function nextQuestion(event) {
 }
 
 function startTimer() {
-	var timerInterval = setInterval(function () {
-		if (secondsLeft === 0 || choice > totalChoices) {
+	timer.textContent = 'Timer: ' + secondsLeft;
+	clearInterval(timerInterval);
+	timerInterval = setInterval(function () {
+		if (secondsLeft === 1 && choice < totalChoices) {
+			result.innerText = "Time's Up!";
+			timeout = setTimeout(() => {
+				result.innerText = '';
+			}, 1000);
+			nextQuestion();
+		}
+		if (secondsLeft === 1 && choice === totalChoices) {
 			clearInterval(timerInterval);
 			endQuiz();
 		}
