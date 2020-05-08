@@ -21,6 +21,7 @@ var secondsLeft = 10;
 var choice = 0;
 var questionIndex = 0;
 var timerInterval;
+var timeout;
 
 var quizData = [
 	{
