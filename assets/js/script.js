@@ -51,10 +51,14 @@ var quizData = [
 		question: 'Which event occurs when the user clicks on an HTML element?',
 		answer: 'onclick',
 		choices: ['onclick', 'onmouseclick', 'onchange', 'onmouseover'],
-	},
+	}
 ];
 var answerArray = [answer1, answer2, answer3, answer4];
 var leaderArray = [];
+var totalChoices = 0;
+for (p = 0; p < quizData.length; p++) {
+	totalChoices += quizData[p].choices.length;
+}
 
 answerList.setAttribute('class', 'list-group flex-center');
 
@@ -89,12 +93,12 @@ function nextQuestion(event) {
 			result.innerText = '';
 		}, 1000);
 	}
-	if (questionIndex < 3) {
+	if (questionIndex < (quizData.length - 1)) {
 		header.textContent = quizData[++questionIndex].question;
 	}
 	for (n = 0; n < answerArray.length; n++) {
 		choice++;
-		if (choice > 16) {
+		if (choice > totalChoices) {
 			endQuiz();
 			return;
 		}
@@ -104,11 +108,11 @@ function nextQuestion(event) {
 
 function startTimer() {
 	var timerInterval = setInterval(function () {
-		if (secondsLeft === 0 || choice > 16) {
+		if (secondsLeft === 0 || choice > totalChoices) {
 			clearInterval(timerInterval);
 			endQuiz();
 		}
-		if (secondsLeft > 0 && choice <= 16) {
+		if (secondsLeft > 0 && choice <= totalChoices) {
 			secondsLeft = secondsLeft - 1;
 			timer.textContent = 'Timer: ' + secondsLeft;
 		}
