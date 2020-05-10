@@ -10,6 +10,9 @@ quiz = document.getElementById('quiz');
 form = document.getElementById('score-form');
 result = document.getElementById('result');
 leaderboard = document.getElementById('leaderboard');
+hiscoreEl = document.getElementById('hiscore');
+hiscoreNum = document.getElementById('hiscoreNum');
+hiscoreName = document.getElementById('hiscoreName');
 leaderList = document.createElement('li');
 answerList = document.createElement('div');
 answer1 = document.createElement('button');
@@ -62,6 +65,12 @@ for (p = 0; p < quizData.length; p++) {
 	totalChoices += quizData[p].choices.length;
 }
 
+if (localStorage.getItem('hiScore') === null) {
+	hiscoreEl.style.display = 'none';
+} else {
+	hiscoreNum.innerText = JSON.parse(localStorage.getItem('hiScore')).hiscore;
+	hiscoreName.innerText = JSON.parse(localStorage.getItem('hiScore')).initials;
+}
 answerList.setAttribute('class', 'list-group flex-center');
 
 startBtn.onclick = function startQuiz() {
@@ -72,6 +81,7 @@ startBtn.onclick = function startQuiz() {
 	startBtn.style.display = 'none';
 	quiz.appendChild(answerList);
 	answerList.style = '';
+	hiscoreEl.style.display = 'none';
 
 	for (choice = 0; choice < answerArray.length; choice++) {
 		answerArray[choice].setAttribute('class', 'list-group-item list=group-item-action');
@@ -148,21 +158,29 @@ function endQuiz() {
 
 function scoreForm() {
 	form.style.display = 'flex';
+	if (localStorage.getItem('hiScore') === null) {
+	} else {
+		hiscoreEl.style = '';
+	}
 }
 
 function addLeader(event) {
 	event.preventDefault();
 	leaderArray.push({ initials: initials.value, score: score });
-	var hiScore = [{ 
+	var hiScore = { 
 		initials: initials.value, 
 		hiscore: Math.max.apply(Math, leaderArray.map(function(o) { return o.score; }))
-	}];
-	if (localStorage.getItem('hiscore') === null) {
-		localStorage.setItem('hiscore', JSON.stringify(hiScore));
+	};
+	if (localStorage.getItem('hiScore') === null) {
+		localStorage.setItem('hiScore', JSON.stringify(hiScore));
+		hiscoreNum.innerText = hiScore.hiscore;
+		hiscoreName.innerText = hiScore.initials;
 	}
-	if (score > JSON.parse(localStorage.getItem('hiscore'))[0].hiscore){
-		localStorage.removeItem('hiscore');
-		localStorage.setItem('hiscore', JSON.stringify(hiScore));
+	if (score > JSON.parse(localStorage.getItem('hiScore')).hiscore){
+		localStorage.removeItem('hiScore');
+		localStorage.setItem('hiScore', JSON.stringify(hiScore));
+		hiscoreNum.innerText = hiScore.hiscore;
+		hiscoreName.innerText = hiScore.initials;
 	}
 	leaderboard.style.display = 'grid';
 	form.style.display = 'none';
@@ -181,6 +199,7 @@ function goBack() {
 	startBtn.style = '';
 	// hide leaderboard
 	leaderboard.style.display = 'none';
+	hiscoreEl.style = '';
 }
 
 function clearBoard() {

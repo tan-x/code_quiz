@@ -42,6 +42,10 @@ main {
 	display: none;
 }
 
+#hiscore {
+	margin-top: 20px;
+}
+
 button:active,
 button:focus {
 	outline: none !important;
