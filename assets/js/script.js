@@ -65,8 +65,8 @@ for (p = 0; p < quizData.length; p++) {
 answerList.setAttribute('class', 'list-group flex-center');
 
 startBtn.onclick = function startQuiz() {
-	startTimer();
 	score = 0;
+	startTimer();
 	header.textContent = quizData[questionIndex].question;
 	intro.style.display = 'none';
 	startBtn.style.display = 'none';
@@ -86,11 +86,14 @@ function answerClick(event) {
 	if (event.target.innerText === quizData[questionIndex].answer) {
 		result.innerText = 'Correct!';
 		score += (10 + secondsLeft);
+		console.log(score);
 		timeout = setTimeout(() => {
 			result.innerText = '';
 		}, 1000);
 	} else {
 		result.innerText = 'Wrong!';
+
+		console.log(score);
 		timeout = setTimeout(() => {
 			result.innerText = '';
 		}, 1000);
@@ -150,6 +153,17 @@ function scoreForm() {
 function addLeader(event) {
 	event.preventDefault();
 	leaderArray.push({ initials: initials.value, score: score });
+	var hiScore = [{ 
+		initials: initials.value, 
+		hiscore: Math.max.apply(Math, leaderArray.map(function(o) { return o.score; }))
+	}];
+	if (localStorage.getItem('hiscore') === null) {
+		localStorage.setItem('hiscore', JSON.stringify(hiScore));
+	}
+	if (score > JSON.parse(localStorage.getItem('hiscore'))[0].hiscore){
+		localStorage.removeItem('hiscore');
+		localStorage.setItem('hiscore', JSON.stringify(hiScore));
+	}
 	leaderboard.style.display = 'grid';
 	form.style.display = 'none';
 	leaderboard.children[0].appendChild(document.createElement('li'));
@@ -158,7 +172,7 @@ function addLeader(event) {
 
 function goBack() {
 	// reset timer and question index
-	secondsLeft = 40;
+	secondsLeft = 10;
 	timer.textContent = 'Timer: ' + secondsLeft;
 	questionIndex = 0;
 	// reset elements to start page layout
