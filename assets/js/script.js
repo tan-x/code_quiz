@@ -58,6 +58,8 @@ var quizData = [
 		choices: ['onclick', 'onmouseclick', 'onchange', 'onmouseover'],
 	},
 ];
+var questionNum;
+var randomQuestion;
 var answerArray = [answer1, answer2, answer3, answer4];
 var leaderArray = [];
 var totalChoices = 0;
@@ -73,10 +75,29 @@ if (localStorage.getItem('hiScore') === null) {
 }
 answerList.setAttribute('class', 'list-group flex-center');
 
+function randomize () {
+	// clear arrays
+	questionNum = [];
+	randomQuestion = [];
+	// fill question number array according to length of quizData/number of questions
+	for (i = 0; i < quizData.length; i++) {
+		questionNum.push(i);
+	}
+	// fill randomQuestion array and remove the selected number question from originaly array each iteration
+	while (randomQuestion.length < quizData.length) {
+		var randomNum = Math.floor(Math.random() * questionNum.length);
+		randomQuestion.push(questionNum[randomNum]);
+		questionNum.splice(randomNum, 1);
+	}
+	console.log(questionNum);
+	console.log(randomQuestion);
+}
+
 startBtn.onclick = function startQuiz() {
+	randomize();
 	score = 0;
 	startTimer();
-	header.textContent = quizData[questionIndex].question;
+	header.textContent = quizData[randomQuestion[0]].question;
 	intro.style.display = 'none';
 	startBtn.style.display = 'none';
 	quiz.appendChild(answerList);
@@ -88,12 +109,12 @@ startBtn.onclick = function startQuiz() {
 		answerArray[choice].setAttribute('type', 'button');
 		answerArray[choice].setAttribute('onclick', 'answerClick(event)');
 		answerList.appendChild(answerArray[choice]);
-		answerArray[choice].textContent = quizData[0].choices[choice];
+		answerArray[choice].textContent = quizData[randomQuestion[0]].choices[choice];
 	}
 };
 
 function answerClick(event) {
-	if (event.target.innerText === quizData[questionIndex].answer) {
+	if (event.target.innerText === quizData[randomQuestion[questionIndex]].answer) {
 		result.innerText = 'Correct!';
 		score += (10 + secondsLeft);
 		console.log(score);
@@ -115,7 +136,7 @@ function nextQuestion() {
 	secondsLeft = 10;
 	startTimer();
 	if (questionIndex < quizData.length - 1) {
-		header.textContent = quizData[++questionIndex].question;
+		header.textContent = quizData[randomQuestion[++questionIndex]].question;
 	}
 	for (n = 0; n < answerArray.length; n++) {
 		choice++;
@@ -123,7 +144,7 @@ function nextQuestion() {
 			endQuiz();
 			return;
 		}
-		answerArray[n].textContent = quizData[questionIndex].choices[n];
+		answerArray[n].textContent = quizData[randomQuestion[questionIndex]].choices[n];
 	}
 }
 
