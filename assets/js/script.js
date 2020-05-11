@@ -57,6 +57,36 @@ var quizData = [
 		answer: 'onclick',
 		choices: ['onclick', 'onmouseclick', 'onchange', 'onmouseover'],
 	},
+	{
+		question: 'Using the ______ statement is how you test for a specific condition.',
+		answer: 'if',
+		choices: ['select', 'if', 'switch', 'for'],
+	},
+	{
+		question: 'Which method of an Array object adds and/or removes elements from an array?',
+		answer: 'splice',
+		choices: ['reverse', 'shift', 'slice', 'splice'],
+	},
+	{
+		question: 'Which is not a primitive data type in JavaScript?',
+		answer: 'character',
+		choices: ['boolean', 'character', 'string', 'number'],
+	},
+	{
+		question: 'Which is not a logical operator?',
+		answer: '&',
+		choices: ['!', '&', '&&', '||'],
+	},
+	{
+		question: 'Which of these operators compares two variables by value AND type?',
+		answer: '===',
+		choices: ['=', '==', '===', 'None of the above'],
+	},
+	{
+		question: 'What is the value of the following expression: 8 % 3',
+		answer: '2',
+		choices: ['5', '2', '24', 'null'],
+	}
 ];
 var questionNum;
 var randomQuestion;
