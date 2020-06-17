@@ -172,13 +172,13 @@ function answerClick(event) {
 		timePenalty = 0;
 		timeout = setTimeout(() => {
 			result.innerText = '';
-		}, 1000);
+		}, 1500);
 	} else {
 		result.innerText = 'Wrong! Time Penalty!';
 		timePenalty += 1;
 		timeout = setTimeout(() => {
 			result.innerText = '';
-		}, 1000);
+		}, 1500);
 	}
 	nextQuestion();
 }
@@ -212,7 +212,7 @@ function startTimer() {
 			result.innerText = "Time's Up!";
 			timeout = setTimeout(() => {
 				result.innerText = '';
-			}, 1000);
+			}, 1500);
 			nextQuestion();
 		}
 		// if the timer runs out on the last question, end quiz
